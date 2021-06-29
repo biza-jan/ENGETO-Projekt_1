@@ -65,8 +65,8 @@ garpike and stingray are also present.'''
 ]
 # user choice no. of text / vyber textu
 # 4. Program nechá uživatel vybrat mezi třemi texty, uloženými v proměnné TEXTS. Pokud uživatel vybere takové číslo textu, které není v zadání, program jej upozorní a skončí. Pokud uživatel zadá jiný vstup než číslo, program jej rovněž upozorní a skončí.
-choice = int(input('Enter a number btw. 1 and 3 to select: '))
-if choice <= 3 and choice >= 1:
+choice = input('Enter a number btw. 1 and 3 to select: ')
+if choice in ['1','2','3']:
     pass
 else:
     print('Your choice is not available')
@@ -74,14 +74,17 @@ else:
 print(separator)
 
 # 5. Pro vybraný text spočítá následující statistiky:
-if choice == int(1):
+if choice == '1':
     TEXT = TEXTS[0]
-elif choice == int(2):
+elif choice == '2':
     TEXT = TEXTS[1]
-elif choice == int(3):
+elif choice == '3':
     TEXT = TEXTS[2]
 else:
     print('Something is wrong')
+
+# ocistim o znaky ,.?! atd.
+TEXT = TEXT.translate({ord(c): None for c in ',.?!'})
 
 # pocet slov
 Count_words = int(len(TEXT.split()))
@@ -118,9 +121,6 @@ print(separator)
 
 # 6. Program zobrazí jednoduchý sloupcový graf, který bude reprezentovat četnost různých délek slov v textu. Například takto:
 
-# ocistim o znaky ,.?! atd.
-TEXT = TEXT.translate({ord(c): None for c in ',.?!'})
-
 # vytvorim list s delkami slov
 TEXT_graph = []
 for x in TEXT.split():
@@ -148,3 +148,4 @@ for k, v in TEXT_graph_dict_sort:
 
 # code by Jan Biza in 26th June 2021
 # code in PyCharm / Python 3.9
+# update in 29th June 2021
